@@ -40,6 +40,14 @@ def insertword():
 
     return json.dumps([])
 
+@app.route('/autoinsert', methods=['POST'])
+def insertdefault():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    keyword = request.form.get('keyword')
+
+    page = wikipedia.page(keyword)
+
 
 @app.route('/query', methods=['POST'])
 def testquery():
@@ -48,7 +56,11 @@ def testquery():
     cursor = mysql.connect().cursor()
     print "starting mysql"
 
-    sql_query = "SELECT title FROM (SELECT title FROM (SELECT * FROM (SELECT t1.category AS cat1 FROM `TABLE 2` AS t1 WHERE t1.title = '" + keyword  + "') AS A CROSS JOIN (SELECT t2.category AS cat2, t2.title AS title FROM `TABLE 2` AS t2 WHERE t2.title<>'" + keyword + "') AS B) AS C WHERE cat1=cat2) AS D GROUP BY title HAVING COUNT(title)>2"
+    cursor.execute("SELECT * FROM `TABLE 1` WHERE title='" + keyword + "'")
+    if not cursor.rowcount:
+        return json.dumps(["NULL"]);
+
+    sql_query = "SELECT title FROM (SELECT title FROM (SELECT * FROM (SELECT t1.category AS cat1 FROM `TABLE 2` AS t1 WHERE t1.title = '" + keyword  + "') AS A CROSS JOIN (SELECT t2.category AS cat2, t2.title AS title FROM `TABLE 2` AS t2 WHERE t2.title<>'" + keyword + "') AS B) AS C WHERE cat1=cat2) AS D GROUP BY title HAVING COUNT(title)>0"
     print sql_query
     cursor.execute(sql_query)
     data = cursor.fetchall()
