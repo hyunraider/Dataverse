@@ -78,7 +78,7 @@ $("#querybox").click(function(e){
                     },
                     type: 'POST',
                     success: function(response){
-
+                        console.log("Success in Autoinsert");
                     },
                     error: function(error){
                         console.log(error);
@@ -105,4 +105,5 @@ $("#querybox").click(function(e){
             console.log(error);
         }
     });
-});
+})
+

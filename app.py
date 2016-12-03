@@ -2,6 +2,51 @@ from flask import Flask, url_for, render_template, jsonify, request, json
 from flask.ext.mysql import MySQL
 import wikipedia
 
+months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+def det_exc(category):
+  if "Articles" in category:
+    return True
+  elif "articles" in category:
+    return True
+  elif "introduction" in category:
+    return True
+  elif "Introduction" in category:
+    return True
+  elif "NPOV" in category:
+    return True
+  elif "Webarchive" in category:
+    return True
+  elif "pages" in category:
+    return True
+  elif "Pages" in category:
+    return True
+  elif "EngvarB" in category:
+    return True
+  elif "EngvarA" in category:
+    return True
+  elif "Wikipedia" in category:
+    return True
+  elif "Wikidata" in category:
+    return True
+  elif "Accuracy" in category:
+    return True
+  elif "accuracy" in category:
+    return True
+  elif "Interlanguage" in category:
+    return True
+  elif any(x in category for x in months):
+    return True
+  elif category[0:4] == "Use ":
+    return True
+  elif category[0:3] == "CS1":
+    return True
+  elif category[0:8] == "Commons ":
+    return True
+  elif category[0:6] == "Vague ":
+    return True
+  else:
+    return False
 
 mysql = MySQL()
 app = Flask(__name__)
@@ -47,6 +92,35 @@ def insertdefault():
     keyword = request.form.get('keyword')
 
     page = wikipedia.page(keyword)
+
+    myCat = page.categories
+
+    exclude_these = []
+    for category in myCat:
+        if (det_exc(category) == True):
+            exclude_these.append(category)
+            continue
+
+    insertCat = [cat for cat in myCat if cat not in exclude_these]
+
+    summary = page.content.split('\n')[0].encode('ascii', 'replace')
+    images = page.images
+
+    if (images):
+        imageUrl = images[0]
+    else:
+        imageUrl = ''
+
+    cursor.execute("INSERT INTO `TABLE 1` VALUES ('" + page.title + "', '" + page.url + "', '" + summary + "', '" + imageUrl + "')")
+    conn.commit()
+
+    for cat in insertCat:
+        cursor.execute("INSERT INTO `TABLE 2` VALUES ('" + page.title + "', '" + cat + "')");
+        conn.commit()
+
+
+    print insertCat
+    return json.dumps([])
 
 
 @app.route('/query', methods=['POST'])
