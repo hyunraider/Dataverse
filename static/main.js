@@ -29,7 +29,9 @@ $(document).ready(function(){
 
 
 var $grid = $("#masonry").masonry({
-            
+  columnWidth: 200,
+  gutter: 10,
+  fitWidth: true
 });
 
 $("#insertbox").click(function(e){
