@@ -3,7 +3,7 @@
 <head>
 	<title>Dataverse</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="cs411.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css')}}">
 
 </head>
 <body>
@@ -54,15 +54,13 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
                 <div class="card-image">
-                    <img class="img-responsive center-block" src="https://www.att.com/catalog/en/skus/images/apple-iphone%206s%20plus%2016gb-space%20gray-450x350.png">
-                    <span class="card-title">Material Cards</span>
+                    <img class="img-responsive center-block" src="">
                 </div>
                 
                 <div class="card-content">
-                    <h3>iPhone
+                    <h3 id="card-name">
                     </h3>
-                    <p>iPhone (/ˈaɪfoʊn/ eye-fohn) is a line of smartphones designed and marketed by Apple Inc. They run Apple's iOS mobile operating system.[14] The first generation iPhone was released on June 29, 2007; the most recent iPhone model is the iPhone 7, which was unveiled at a special event on September 7, 2016.[15][16]
-
+                    <p id="card-summary">
                     </p>
                 </div>
                

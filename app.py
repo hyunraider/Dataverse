@@ -134,6 +134,15 @@ def testquery():
     if not cursor.rowcount:
         return json.dumps(["NULL"]);
 
+    myData = cursor.fetchone()
+
+    print myData;
+    myObj = {}
+    myObj["title"]=myData[0]
+    myObj["url"]=myData[1]
+    myObj["summary"]=myData[2]
+    myObj["images"]=myData[3]
+
     sql_query = "SELECT title FROM (SELECT title FROM (SELECT * FROM (SELECT t1.category AS cat1 FROM `TABLE 2` AS t1 WHERE t1.title = '" + keyword  + "') AS A CROSS JOIN (SELECT t2.category AS cat2, t2.title AS title FROM `TABLE 2` AS t2 WHERE t2.title<>'" + keyword + "') AS B) AS C WHERE cat1=cat2) AS D GROUP BY title HAVING COUNT(title)>0"
     print sql_query
     cursor.execute(sql_query)
@@ -145,6 +154,8 @@ def testquery():
     print myList
 
     returnList = []
+    returnList.append(myObj);
+
     for x in myList:
         temp_sql_query = "SELECT * FROM `TABLE 1` WHERE title='" + x + "'"
         print temp_sql_query
@@ -155,6 +166,7 @@ def testquery():
             someList.append(y)
 
         returnList.append(someList)
+
 
     return json.dumps(returnList)
 
