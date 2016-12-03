@@ -18,7 +18,7 @@
 						<li>Confirm from the console that you have gotten a query back, then refresh the page</li>
 
 					</ol>
-					<p>It's still a work in progress and we're having a lot of trouble with the Importing from Wiki. We also are trying to figure out the best way to integrate the tables with MySQL</p>
+					
 				</div>
 			</div>
 			<div class="row">
@@ -26,21 +26,21 @@
 					<input type="text" class="form-control" id="queryword" placeholder="Enter Query Here" aria-describedby="basic-addon1">
 				</div>
 				<button type="button" id="querybox" class="btn btn-default">Search!</button>
-				
+			    <div class="input-group">
+			    	<input type="text" class="form-control" id="insertstuff" placeholder="Enter Associative Word" aria-describedby="basic-addon1">
+			    </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="category" placeholder="Enter Category" aria-describedby="basic-addon1">
+                </div>
+                <button type="button" id="insertbox" class="btn btn-default">Insert!</button>
 			</div>
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
-					{{kek}}
-					{% for db in dbs %}
-					{{db | safe}}
-					{{db}}
-					{% endfor %}
-					{{my_html | safe}}
-				</div>
+			<div id="masonry" class="row container" style="width:100%">
+				    
 			</div>
 		</div>	
 			<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>	
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
 	</body>
 </html>
