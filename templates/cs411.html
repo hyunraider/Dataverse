@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dataverse</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="cs411.css">
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="jumbotron">
+				<h1>Dataverse</h1>
+				<p>This is the Demo Website for Group 32: RNG</p>
+				<p>Created by: Austin Bae, David Gu, Jasper Ting, Brian Zhou</p>
+				<p>Instructions:</p>
+				<ol>
+					<li>Open up the Browser Console</li>
+					<li>Search up a term existing in our database (We haven't imported every dataset yet). Some of the keywords include "Tax", "Autism", etc.</li>
+					<li>Confirm from the console that you have gotten a query back, then refresh the page</li>
+
+				</ol>
+
+			</div>
+		</div>
+		
+	</div>
+	<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="input-group" id="adv-search">
+						<input type="text" class="form-control" id="queryword" placeholder="Search the Dataverse" />
+						<div class="input-group-btn">
+							<div class="btn-group" role="group">
+								<div class="dropdown dropdown-lg">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-plus"></span></button>
+									<div class="dropdown-menu dropdown-menu-right" role="menu">
+										<form class="form-horizontal" role="form">
+											<div class="form-group">
+												<label for="contain">Associative Word</label>
+												<input class="form-control" id="insertstuff" type="text" />
+											</div>
+											<div class="form-group">
+												<label for="contain">Category</label>
+												<input class="form-control" id="category" type="text" />
+											</div>
+											<button type="submit" id="insertbox" class="btn btn-primary">Insert!</button>
+										</form>
+									</div>
+								</div>
+								<button type="button" id="querybox" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="row">
+		<div id="masonry" class="row container" style="width:100%">
+
+		</div>
+	</div>
+</div>	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>	
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
