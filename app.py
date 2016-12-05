@@ -67,6 +67,10 @@ def insertword():
     keyword = request.form.get('keyword')
     insertword = request.form.get('insert')
     catword = request.form.get('cat')
+    summary = request.form.get('summary')
+    imageURL = request.form.get('imageURL')
+
+    print summary
 
     sql_query = "INSERT INTO `TABLE 2` VALUES ('" + keyword + "', '" + catword + "')"
     cursor.execute(sql_query)
@@ -78,7 +82,7 @@ def insertword():
     cursor.execute(sql_query)
     data = cursor.fetchall()
     if len(data) == 0:
-        sql_query = "INSERT INTO `TABLE 1` VALUES ('" + insertword + "', 'KEK', 'This is a feature to be implemented!', 'KEK')"
+        sql_query = "INSERT INTO `TABLE 1` VALUES ('" + str(insertword) + "', 'KEK', '" + str(summary) + "', '" + str(imageURL)+ "')"
         cursor.execute(sql_query)
         conn.commit()
         print "inserted"

@@ -25,13 +25,11 @@ $("#querybox").click(function(e){
 });
 */
 $(document).ready(function(){
+  gutter:10
 });
 
 
 var $grid = $("#masonry").masonry({
-  columnWidth: 200,
-  gutter: 10,
-  fitWidth: true
 });
 
 $("#insertbox").click(function(e){
@@ -39,12 +37,17 @@ $("#insertbox").click(function(e){
     var keyword = $('#queryword').val();
     var insert = $('#insertstuff').val();
     var cat = $('#category').val();
+    var summary = $('#inputText').val();
+    var imageURL = $('#inputURL').val();
+
     $.ajax({
         url:'/insert',
         data: {
             keyword: keyword,
             insert: insert,
-            cat: cat
+            cat: cat,
+            summary: summary,
+            imageURL: imageURL
         },
         type: 'POST',
         success: function(response){
@@ -107,7 +110,7 @@ $("#querybox").click(function(e){
                     console.log(list);
                     var $newblock = $(document.createElement('div'));
                     $newblock.addClass("col-sm-4");
-                    $newblock.css({"width":"250px", "display":"inline-block" ,"border": "2px black solid", "background-color":"red"});
+                    $newblock.css({"width":"250px", "display":"inline-block" ,"border": "1px #d3d3d3 solid", "background-color":"white"});
                     $newblock.append("<h4>" + list[0] + "</h4>");
                     console.log(response);
                     console.log(myJSON.summary);
